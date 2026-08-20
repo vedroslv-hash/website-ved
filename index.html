@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="VEDROS GAMESS Ltd. creates bold, immersive games and unforgettable digital worlds.">
+  <meta name="theme-color" content="#08080f">
+  <title>VEDROS GAMESS Ltd. | Beyond the Screen</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+    :root {
+      --bg: #08080f;
+      --surface: #11111c;
+      --surface-2: #171725;
+      --text: #f7f5ff;
+      --muted: #a6a4b4;
+      --purple: #8b5cf6;
+      --pink: #ec4899;
+      --cyan: #22d3ee;
+      --line: rgba(255,255,255,.1);
+      --shadow: 0 24px 70px rgba(0,0,0,.42);
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 0%, rgba(139,92,246,.17), transparent 30rem),
+        radial-gradient(circle at 90% 20%, rgba(34,211,238,.09), transparent 25rem),
+        var(--bg);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input, textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1160px, calc(100% - 40px));
+      margin: auto;
+    }
+
+    .gradient-text {
+      background: linear-gradient(100deg, #fff 10%, #c4b5fd 42%, #67e8f9 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: #c4b5fd;
+      font-size: .77rem;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 24px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--purple), var(--cyan));
+      border-radius: 5px;
+    }
+
+    .section {
+      padding: 110px 0;
+    }
+
+    .section-heading {
+      max-width: 650px;
+      margin-bottom: 48px;
+    }
+
+    .section-heading h2 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(2.1rem, 5vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: -.04em;
+      margin: 15px 0 18px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 1.03rem;
+    }
+
+    .nav-wrap {
+      position: fixed;
+      z-index: 100;
+      top: 18px;
+      left: 0;
+      width: 100%;
+      pointer-events: none;
+    }
+
+    nav {
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 15px 0 22px;
+      border: 1px solid var(--line);
+      background: rgba(10,10,18,.76);
+      backdrop-filter: blur(18px);
+      border-radius: 18px;
+      box-shadow: 0 12px 35px rgba(0,0,0,.25);
+      pointer-events: auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      letter-spacing: -.03em;
+      white-space: nowrap;
+    }
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      font-size: .95rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      clip-path: polygon(25% 0, 100% 0, 76% 100%, 0 100%);
+      filter: drop-shadow(0 5px 15px rgba(139,92,246,.4));
+    }
+
+    .logo small {
+      color: #8e8b9d;
+      font-size: .63rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      margin-left: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+    }
+
+    .nav-links > a {
+      color: #c7c5d0;
+      font-size: .9rem;
+      font-weight: 600;
+      transition: .25s;
+    }
+
+    .nav-links > a:hover {
+      color: #fff;
+    }
+
+    .nav-cta, .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border: 0;
+      border-radius: 12px;
+      font-weight: 700;
+      transition: transform .25s, box-shadow .25s, background .25s;
+    }
+
+    .nav-cta {
+      padding: 11px 17px;
+      color: #fff !important;
+      background: linear-gradient(135deg, var(--purple), #6d4df1);
+      box-shadow: 0 8px 24px rgba(139,92,246,.25);
+    }
+
+    .btn {
+      min-height: 52px;
+      padding: 0 23px;
+    }
+
+    .btn:hover, .nav-cta:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      color: #fff;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      box-shadow: 0 12px 35px rgba(139,92,246,.3);
+    }
+
+    .btn-secondary {
+      color: #fff;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.045);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,.09);
+    }
+
+    .menu-btn {
+      display: none;
+      color: #fff;
+      background: none;
+      border: 0;
+      font-size: 1.4rem;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 840px;
+      display: flex;
+      align-items: center;
+      padding: 145px 0 90px;
+      isolation: isolate;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        linear-gradient(90deg, rgba(8,8,15,.97) 2%, rgba(8,8,15,.79) 44%, rgba(8,8,15,.2) 78%),
+        linear-gradient(0deg, var(--bg), transparent 38%),
+        url("https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=2000&q=85") center/cover;
+      opacity: .77;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: 480px;
+      height: 480px;
+      right: -150px;
+      top: 140px;
+      border-radius: 50%;
+      background: var(--purple);
+      filter: blur(150px);
+      opacity: .16;
+    }
+
+    .hero-content {
+      max-width: 770px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 13px;
+      margin-bottom: 26px;
+      color: #d8d5e2;
+      font-size: .78rem;
+      font-weight: 600;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px;
+      background: rgba(10,10,18,.56);
+      backdrop-filter: blur(12px);
+    }
+
+    .status-pill i {
+      position: relative;
+      width: 8px;
+      height: 8px;
+      background: #4ade80;
+      border-radius: 50%;
+      box-shadow: 0 0 15px #4ade80;
+    }
+
+    .hero h1 {
+      max-width: 760px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(3.3rem, 8.2vw, 7.2rem);
+      line-height: .9;
+      letter-spacing: -.065em;
+      margin-bottom: 27px;
+    }
+
+    .hero p {
+      max-width: 630px;
+      color: #bbb9c7;
+      font-size: clamp(1rem, 2vw, 1.18rem);
+      margin-bottom: 35px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 44px;
+      margin-top: 67px;
+    }
+
+    .stat strong {
+      display: block;
+      font-family: "Space Grotesk";
+      font-size: 1.8rem;
+      line-height: 1.1;
+    }
+
+    .stat span {
+      color: #898795;
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+
+    .games {
+      position: relative;
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      grid-template-rows: repeat(2, 285px);
+      gap: 22px;
+    }
+
+    .game-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 285px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+
+    .game-card.featured {
+      grid-row: 1 / 3;
+    }
+
+    .game-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(0deg, rgba(6,6,12,.98) 2%, rgba(6,6,12,.1) 70%);
+    }
+
+    .game-card img {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .65s ease;
+    }
+
+    .game-card:hover img {
+      transform: scale(1.06);
+    }
+
+    .game-info {
+      position: absolute;
+      inset: auto 0 0;
+      padding: 28px;
+    }
+
+    .tag {
+      display: inline-flex;
+      padding: 5px 9px;
+      color: #e7ddff;
+      font-size: .66rem;
+      font-weight: 800;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+      border: 1px solid rgba(196,181,253,.26);
+      border-radius: 999px;
+      background: rgba(139,92,246,.18);
+      backdrop-filter: blur(8px);
+    }
+
+    .game-info h3 {
+      font-family: "Space Grotesk";
+      font-size: clamp(1.4rem, 3vw, 2.35rem);
+      margin: 10px 0 6px;
+      letter-spacing: -.035em;
+    }
+
+    .game-info p {
+      max-width: 500px;
+      color: #b5b2c1;
+      font-size: .88rem;
+    }
+
+    .game-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+      color: #ddd6fe;
+      font-size: .84rem;
+      font-weight: 700;
+    }
+
+    .about {
+      overflow: hidden;
+      background: linear-gradient(180deg, transparent, rgba(139,92,246,.055), transparent);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      align-items: center;
+      gap: 80px;
+    }
+
+    .studio-visual {
+      position: relative;
+      min-height: 540px;
+    }
+
+    .studio-visual img {
+      width: 88%;
+      height: 500px;
+      object-fit: cover;
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .floating-card {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      max-width: 245px;
+      padding: 22px;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 20px;
+      background: rgba(20,20,32,.84);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 20px 50px rgba(0,0,0,.4);
+    }
+
+    .floating-card strong {
+      display: block;
+      font-family: "Space Grotesk";
+      font-size: 2.2rem;
+      color: #c4b5fd;
+    }
+
+    .floating-card span {
+      color: #aaa7b7;
+      font-size: .86rem;
+    }
+
+    .about-copy h2 {
+      font-family: "Space Grotesk";
+      font-size: clamp(2.3rem, 5vw, 4rem);
+      line-height: 1.07;
+      letter-spacing: -.045em;
+      margin: 15px 0 23px;
+    }
+
+    .about-copy > p {
+      color: var(--muted);
+      margin-bottom: 29px;
+    }
+
+    .values {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .value {
+      padding: 19px;
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      background: rgba(255,255,255,.025);
+    }
+
+    .value-icon {
+      width: 35px;
+      height: 35px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 11px;
+      color: #ddd6fe;
+      border-radius: 10px;
+      background: rgba(139,92,246,.17);
+    }
+
+    .value h3 {
+      font-size: .96rem;
+      margin-bottom: 4px;
+    }
+
+    .value p {
+      color: #8f8d9b;
+      font-size: .79rem;
+    }
+
+    .careers-shell {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 40px;
+      padding: 64px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at 90% 50%, rgba(34,211,238,.16), transparent 25rem),
+        linear-gradient(135deg, rgba(139,92,246,.18), rgba(255,255,255,.03));
+      box-shadow: var(--shadow);
+    }
+
+    .careers-shell::after {
+      content: "";
+      position: absolute;
+      top: -90px;
+      right: 18%;
+      width: 220px;
+      height: 220px;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 50%;
+    }
+
+    .careers-shell h2 {
+      font-family: "Space Grotesk";
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      line-height: 1.05;
+      letter-spacing: -.045em;
+      margin-bottom: 15px;
+    }
+
+    .careers-shell p {
+      max-width: 650px;
+      color: #b3b0bf;
+    }
+
+    footer {
+      padding: 50px 0 30px;
+      border-top: 1px solid var(--line);
+      background: rgba(3,3,8,.42);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 45px;
+      padding-bottom: 42px;
+    }
+
+    .footer-intro p {
+      max-width: 320px;
+      color: #858391;
+      font-size: .86rem;
+      margin-top: 16px;
+    }
+
+    .footer-col h4 {
+      font-size: .83rem;
+      margin-bottom: 17px;
+    }
+
+    .footer-col a {
+      display: block;
+      width: fit-content;
+      color: #8e8c9a;
+      font-size: .84rem;
+      margin: 9px 0;
+      transition: color .2s;
+    }
+
+    .footer-col a:hover {
+      color: #fff;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: 25px;
+      padding-top: 24px;
+      color: #686674;
+      font-size: .76rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (max-width: 900px) {
+      .menu-btn {
+        display: block;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 100px;
+        left: 20px;
+        right: 20px;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 5px;
+        padding: 18px;
+        background: rgba(12,12,21,.96);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        box-shadow: var(--shadow);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links > a {
+        padding: 12px;
+      }
+
+      .games-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: 430px 300px 300px;
+      }
+
+      .game-card.featured {
+        grid-row: auto;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 45px;
+      }
+
+      .studio-visual {
+        order: 2;
+      }
+
+      .careers-shell {
+        grid-template-columns: 1fr;
+        padding: 45px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1.5fr 1fr 1fr;
+      }
+
+      .footer-intro {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: min(100% - 28px, 1160px);
+      }
+
+      .section {
+        padding: 78px 0;
+      }
+
+      .nav-wrap {
+        top: 10px;
+      }
+
+      nav {
+        height: 62px;
+        padding-left: 15px;
+      }
+
+      .logo {
+        font-size: .9rem;
+      }
+
+      .logo small {
+        display: none;
+      }
+
+      .hero {
+        min-height: 760px;
+        padding-top: 125px;
+      }
+
+      .hero::before {
+        background:
+          linear-gradient(0deg, var(--bg) 0%, rgba(8,8,15,.72) 65%, rgba(8,8,15,.4)),
+          url("https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=1200&q=80") center/cover;
+      }
+
+      .hero h1 {
+        font-size: clamp(3.1rem, 18vw, 5.5rem);
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .hero-stats {
+        gap: 25px;
+        justify-content: space-between;
+        margin-top: 50px;
+      }
+
+      .stat strong {
+        font-size: 1.4rem;
+      }
+
+      .stat span {
+        font-size: .63rem;
+      }
+
+      .games-grid {
+        grid-template-rows: repeat(3, 360px);
+      }
+
+      .game-info {
+        padding: 22px;
+      }
+
+      .studio-visual {
+        min-height: 450px;
+      }
+
+      .studio-visual img {
+        width: 100%;
+        height: 390px;
+      }
+
+      .floating-card {
+        left: 20px;
+        right: 20px;
+        max-width: none;
+      }
+
+      .values {
+        grid-template-columns: 1fr;
+      }
+
+      .careers-shell {
+        padding: 34px 25px;
+      }
+
+      .careers-shell .btn {
+        width: 100%;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 35px 20px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav-wrap">
+    <nav class="container" aria-label="Main navigation">
+      <a class="logo" href="#home" aria-label="VEDROS GAMESS home">
+        <span class="logo-mark">V</span>
+        <span>VEDROS GAMESS <small>LTD.</small></span>
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#games">Games</a>
+        <a href="#studio">Studio</a>
+        <a href="#careers">Careers</a>
+        <a href="#contact" class="nav-cta">Get in touch</a>
+      </div>
+
+      <button class="menu-btn" id="menuBtn" aria-label="Open navigation" aria-expanded="false">☰</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-content reveal">
+          <div class="status-pill"><i></i> Building our next original universe</div>
+          <h1>WE CREATE <span class="gradient-text">WORLDS.</span></h1>
+          <p>VEDROS GAMESS Ltd. is an independent game studio crafting bold adventures, unforgettable characters, and experiences that stay with players long after the screen fades.</p>
+          <div class="hero-actions">
+            <a href="#games" class="btn btn-primary">Explore our games <span>→</span></a>
+            <a href="#studio" class="btn btn-secondary">Meet the studio</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat"><strong>3</strong><span>Original IPs</span></div>
+            <div class="stat"><strong>18+</strong><span>Creators</span></div>
+            <div class="stat"><strong>12M</strong><span>Players reached</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section games" id="games">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">Featured worlds</span>
+          <h2>Stories built to be <span class="gradient-text">lived.</span></h2>
+          <p>From atmospheric frontiers to fast-paced competitive arenas, every VEDROS experience is designed around player emotion and meaningful discovery.</p>
+        </div>
+
+        <div class="games-grid">
+          <article class="game-card featured reveal">
+            <img src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1200&q=85" alt="A mysterious fantasy mountain world">
+            <div class="game-info">
+              <span class="tag">In development</span>
+              <h3>ECHOES OF VEDRA</h3>
+              <p>Cross the shattered wilds, uncover an ancient signal, and decide what survives in our cinematic action adventure.</p>
+              <a href="#contact" class="game-link">Follow development <span>↗</span></a>
+            </div>
+          </article>
+
+          <article class="game-card reveal">
+            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=85" alt="Neon science fiction city">
+            <div class="game-info">
+              <span class="tag">Available now</span>
+              <h3>NEON DRIFT</h3>
+              <p>High-speed racing through a city that never sleeps.</p>
+              <a href="#contact" class="game-link">Discover the game <span>↗</span></a>
+            </div>
+          </article>
+
+          <article class="game-card reveal">
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1000&q=85" alt="Atmospheric natural landscape">
+            <div class="game-info">
+              <span class="tag">Award winning</span>
+              <h3>HOLLOW SKY</h3>
+              <p>A quiet journey about memory, distance, and home.</p>
+              <a href="#contact" class="game-link">Discover the game <span>↗</span></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section about" id="studio">
+      <div class="container about-grid">
+        <div class="studio-visual reveal">
+          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1000&q=85" alt="Creative team collaborating in a modern studio">
+          <div class="floating-card">
+            <strong>One team.</strong>
+            <span>Artists, engineers, writers, and dreamers working side by side.</span>
+          </div>
+        </div>
+
+        <div class="about-copy reveal">
+          <span class="eyebrow">Our studio</span>
+          <h2>Independent by design. <span class="gradient-text">Ambitious by nature.</span></h2>
+          <p>We believe exceptional games begin with trusted teams. VEDROS GAMESS Ltd. brings together diverse talent in a supportive, low-ego studio where bold ideas can become extraordinary player experiences.</p>
+          <div class="values">
+            <div class="value">
+              <div class="value-icon">✦</div>
+              <h3>Craft first</h3>
+              <p>We obsess over every detail that serves the player.</p>
+            </div>
+            <div class="value">
+              <div class="value-icon">◎</div>
+              <h3>Player centered</h3>
+              <p>Empathy and accessibility guide every decision.</p>
+            </div>
+            <div class="value">
+              <div class="value-icon">△</div>
+              <h3>Brave ideas</h3>
+              <p>We explore the unfamiliar and challenge convention.</p>
+            </div>
+            <div class="value">
+              <div class="value-icon">∞</div>
+              <h3>Built together</h3>
+              <p>Our strongest work comes from true collaboration.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="careers">
+      <div class="container">
+        <div class="careers-shell reveal">
+          <div>
+            <span class="eyebrow">Join VEDROS</span>
+            <h2>Help us create the <span class="gradient-text">unforgettable.</span></h2>
+            <p>We are looking for thoughtful, talented people who care deeply about games, their teammates, and the players we serve.</p>
+          </div>
+          <a href="mailto:careers@vedrosgamess.com" class="btn btn-primary">View open roles <span>→</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-intro">
+          <a class="logo" href="#home">
+            <span class="logo-mark">V</span>
+            <span>VEDROS GAMESS <small>LTD.</small></span>
+          </a>
+          <p>Independent game creators making meaningful worlds for players everywhere.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <a href="#games">Our games</a>
+          <a href="#studio">The studio</a>
+          <a href="#careers">Careers</a>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <a href="mailto:hello@vedrosgamess.com">Email us</a>
+          <a href="#" aria-label="VEDROS on Discord">Discord</a>
+          <a href="#" aria-label="VEDROS on YouTube">YouTube</a>
+        </div>
+        <div class="footer-col">
+          <h4>Business</h4>
+          <a href="mailto:press@vedrosgamess.com">Press</a>
+          <a href="mailto:partners@vedrosgamess.com">Partnerships</a>
+          <a href="#">Privacy</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> VEDROS GAMESS Ltd. All rights reserved.</span>
+        <span>Built for players. Powered by imagination.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    menuBtn.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('active');
+      menuBtn.textContent = open ? '✕' : '☰';
+      menuBtn.setAttribute('aria-expanded', open);
+      document.body.classList.toggle('menu-open', open);
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        menuBtn.textContent = '☰';
+        menuBtn.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('menu-open');
+      });
+    });
+
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
